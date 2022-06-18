@@ -231,12 +231,7 @@ class SustainabilityTaxonomy:
         if start_item is None:
             start_item = self.root
 
-        # if taxonomy is empty, number of levels is 0
-        # if start_item is None:
-        #   return 0
-
         # if root has no children, number of levels is 1
-
         if start_item.children is None:
             return 1
 
@@ -408,7 +403,7 @@ class SustainabilityTaxonomy:
         if start_root.children is None:
             return start_root.score * start_root.weight
 
-        # compute the weighted score for all of the children of current item
+        # compute the weighted score for all the children of current item
         for child in start_root.children:
             score += self.compute_scores(child)
 
@@ -435,7 +430,7 @@ class SustainabilityTaxonomy:
     def to_dataframe(self, start_root=None):
         """Convert the entire taxonomy to a DataFrame
 
-        :param start_root: the root item of the taxonomy/substructured to be converted
+        :param start_root: the root item of the taxonomy/substructure to be converted
                           to a DataFrame (default: root of the overall taxonomy)
         :type start_root: SustainabilityItem
         :returns: a dataframe version of the taxonomy
