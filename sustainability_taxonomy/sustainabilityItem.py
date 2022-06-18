@@ -1,0 +1,56 @@
+class SustainabilityItem:
+
+    # children here must be initialized to None (leaf nodes) by default,
+    # or if data was supplied, SustainabilityItems will be created out of those
+    # IDs (fetch from file)
+    def __init__(self, id, name, level=0, grouping=None, parent=None,
+                 score=0, weight=1, children=None, meta_data=None):
+        # acronym, master_lexicon, groups_list, list_acronym, list_id
+        self.id = id
+        self.name = name
+        self.level = level
+        self.grouping = grouping
+        self.parent = parent
+        self.score = score
+        self.weight = weight
+        self.children = children
+        self.meta_data = meta_data
+
+        # details(): prints attributes of the SustainabilityItem
+
+    def details(self):
+        """prints the values of the attributes of the SustainabilityItem object"""
+
+        print(f'name : {self.name}')
+        print(self.id)
+        print(self.level)
+        print(self.children)
+        print(self.score)
+        print(self.weight)
+        print(self.meta_data)
+
+    def to_dict(self):
+        """Converts the SustainabilityItem object to a dictionary
+
+        :returns: the attributes of the SustainabilityItem object
+        :rtype: dict
+        """
+
+        if self.parent is not None:
+            parent_id = self.parent.id
+        else:
+            parent_id = None
+
+        if self.children is not None:
+
+            children_ids = [child.id for child in self.children]
+        else:
+            children_ids = None
+
+        return {'id': self.id, 'name': self.name, 'level': self.level,
+                'grouping': self.grouping, "parent": parent_id,
+                'score': self.weight, 'children': children_ids,
+                'meta_data': self.meta_data}
+
+
+
