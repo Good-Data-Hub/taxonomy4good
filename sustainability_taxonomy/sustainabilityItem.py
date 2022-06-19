@@ -24,15 +24,19 @@ class SustainabilityItem:
         print(f'name: {self.name}')
         print(f"id: {self.id}")
         print(f"level: {self.level}")
+
         if self.children is not None:
             printed_children = [child.id for child in self.children]
         else:
             printed_children = None
+
         print(f"children: {printed_children}")
+
         if self.parent is not None:
             parent = self.parent.id
         else:
             parent = None
+
         print(f"parent: {parent}")
         print(f"score: {self.score}")
         print(f"weight: {self.weight}")
@@ -41,6 +45,7 @@ class SustainabilityItem:
             meta_data = {}
         else:
             meta_data = self.meta_data
+
         print(f"meta_data: {meta_data}")
 
     def to_dict(self):
