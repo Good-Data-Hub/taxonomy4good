@@ -21,13 +21,27 @@ class SustainabilityItem:
     def details(self):
         """prints the values of the attributes of the SustainabilityItem object"""
 
-        print(f'name : {self.name}')
-        print(self.id)
-        print(self.level)
-        print(self.children)
-        print(self.score)
-        print(self.weight)
-        print(self.meta_data)
+        print(f'name: {self.name}')
+        print(f"id: {self.id}")
+        print(f"level: {self.level}")
+        if self.children is not None:
+            printed_children = [child.id for child in self.children]
+        else:
+            printed_children = None
+        print(f"children: {printed_children}")
+        if self.parent is not None:
+            parent = self.parent.id
+        else:
+            parent = None
+        print(f"parent: {parent}")
+        print(f"score: {self.score}")
+        print(f"weight: {self.weight}")
+
+        if self.meta_data is None:
+            meta_data = {}
+        else:
+            meta_data = self.meta_data
+        print(f"meta_data: {meta_data}")
 
     def to_dict(self):
         """Converts the SustainabilityItem object to a dictionary
@@ -49,7 +63,7 @@ class SustainabilityItem:
 
         return {'id': self.id, 'name': self.name, 'level': self.level,
                 'grouping': self.grouping, "parent": parent_id,
-                'score': self.weight, 'children': children_ids,
+                'weight': self.weight, "score": self.score, 'children': children_ids,
                 'meta_data': self.meta_data}
 
 
