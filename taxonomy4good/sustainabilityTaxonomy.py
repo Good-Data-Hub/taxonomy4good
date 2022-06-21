@@ -7,15 +7,15 @@ import json
 import os
 
 BUILTIN_TAXONOMIES = ["eu_taxonomy", "ftse_fsgi", "un_sdg", "world_bank_taxonomy",
-                      "china_taxonomy", "esg_taxonomy", "en_full_lexicon"]
+                      "china_taxonomy", "esg_taxonomy", "en_master_lexicon"]
 
 TAXONOMIES_DESC = {"eu_taxonomy": "EU Taxonomy",
                    "ftse_fsgi": "FTSE for Social Good Index",
                    "un_sdg": "UN SDGs",
                    "world_bank_taxonomy": "World Bank Taxonomy",
-                   "china_taxonomy":"China Taxonomy",
+                   "china_taxonomy": "China Taxonomy",
                    "esg_taxonomy": "ESG Taxonomy",
-                   "en_full_lexicon": "Full Sustainability Lexicon"}
+                   "en_master_lexicon": "Full Sustainability Lexicon"}
 
 
 class SustainabilityTaxonomy:
@@ -617,13 +617,13 @@ class SustainabilityTaxonomy:
         return root_dict
 
 
-# TODO: add a way to include builtin taxonomies (constant names in __init__)
 def from_file(filepath, version_name="Standard Taxonomy", version_num="0.1.0", filetype='excel', meta=False):
     root = SustainabilityItem(id=0, name=version_name)
 
     if filetype == 'excel':
         if filepath in BUILTIN_TAXONOMIES:
-            items_df = pd.read_excel(os.path.dirname(os.path.abspath(__file__))+"/taxonomies/"+filepath+".xlsx")
+            root.name = TAXONOMIES_DESC[filepath]
+            items_df = pd.read_excel(os.path.dirname(os.path.abspath(__file__)) + "/taxonomies/" + filepath + ".xlsx")
             version_name = TAXONOMIES_DESC[filepath]
         else:
             items_df = pd.read_excel(filepath)
@@ -663,11 +663,14 @@ def from_file(filepath, version_name="Standard Taxonomy", version_num="0.1.0", f
         # Update parent children
         if item['parent'] is not None:
             parent = items[int(item['parent'])]
+
             sustainability_item.parent = parent
             if not isinstance(parent.children, list):
                 parent.children = ast.literal_eval(parent.children)
 
+            # print(f"parent: {parent.id}")
             for i in range(len(parent.children)):
+                # print(f"current child: {parent.children[i]}")
                 if sustainability_item.id == parent.children[i]:
                     child_idx = i
 
