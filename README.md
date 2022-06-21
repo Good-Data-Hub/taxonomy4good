@@ -1,5 +1,5 @@
 
-# Lexicon4Good
+# Taxonomy4Good
 <br/><br/>
 <p align="center">
     <a href="https://goodbucks.darkm.co/" target="_blank">
