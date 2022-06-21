@@ -14,15 +14,15 @@ with open(path.join(HERE, 'README.md'), encoding='utf-8') as f:
 
 # This call to setup() does all the work
 setup(
-    name="sustainability-taxonomy",
+    name="taxonomy4good",
     version="0.1.0",
     description="Sustainability lexicon providing both listed and non-listed taxonomies",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://sustainability-lexicon.readthedocs.io/",
-    author="Hloni Dichabe, Emily Luskind, Zwelakhe Gile, Luvo Gila, Myles Francis, Anis Bouhamadouche",
+    url="https://taxonomy4good.readthedocs.io/",
+    author="Hloni Dichabe, Emily Luskind, Zwelakhe Gile, Luvo Gila, Myles Francis, Haroune Aaffoute, Anis Bouhamadouche",
     author_email="gooddatahub@gmail.com, hlonidichabe@gmail.com, luskinde@gmail.com, zwelakhegila@gmail.com, "
-                 "luvogila@gmail.com, mxfrancis43@gmail.com, anis.bouhamadouche@outlook.com",
+                 "luvogila@gmail.com, mxfrancis43@gmail.com, hrna2011@gmail.com,anis.bouhamadouche@outlook.com",
     license="MIT",
     classifiers=[
         "Intended Audience :: Developers",
@@ -37,7 +37,7 @@ setup(
         "Programming Language :: Python :: 3.9",
         "Operating System :: OS Independent"
     ],
-    packages=["sustainability_item"],
+    packages=["taxonomy4good"],
     include_package_data=True,
     install_requires=["numpy", "pandas", "xlrd==1.2.0"]
 )

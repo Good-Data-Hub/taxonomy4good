@@ -1,6 +1,6 @@
 import unittest
 import pytest
-from sustainability_taxonomy.sustainabilityItem import SustainabilityItem
+from taxonomy4good.sustainabilityItem import SustainabilityItem
 
 root = SustainabilityItem(0, "root")
 item1 = SustainabilityItem(1, "item1", level=1, parent=root)
@@ -42,6 +42,22 @@ class TestItems(unittest.TestCase):
         item1.details()
         printed_text = self.capsys.readouterr()
         self.assertEqual(item1_details, printed_text.out)
+
+    def test_update_score(self):
+        with self.subTest():
+            self.assertEqual(item1.score, 0)
+
+        item1.score = 2
+        with self.subTest():
+            self.assertEqual(item1.score, 2)
+
+    def test_weight_update(self):
+        with self.subTest():
+            self.assertEqual(item1.weight, 1)
+
+        item1.weight = 0.10
+        with self.subTest():
+            self.assertEqual(item1.weight, 0.10)
 
 
 if __name__ == '__main__':

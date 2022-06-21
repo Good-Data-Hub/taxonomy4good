@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/sustainability_taxonomy.iml" filepath="$PROJECT_DIR$/.idea/sustainability_taxonomy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../taxonomy4good/.idea/taxonomy4good.iml" filepath="$PROJECT_DIR$/../taxonomy4good/.idea/taxonomy4good.iml" />
     </modules>
   </component>
 </project>

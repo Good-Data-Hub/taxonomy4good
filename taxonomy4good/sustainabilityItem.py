@@ -5,7 +5,6 @@ class SustainabilityItem:
     # IDs (fetch from file)
     def __init__(self, id, name, level=0, grouping=None, parent=None,
                  score=0, weight=1, children=None, meta_data=None):
-        # acronym, master_lexicon, groups_list, list_acronym, list_id
         self.id = id
         self.name = name
         self.level = level
@@ -15,8 +14,6 @@ class SustainabilityItem:
         self.weight = weight
         self.children = children
         self.meta_data = meta_data
-
-        # details(): prints attributes of the SustainabilityItem
 
     def details(self):
         """prints the values of the attributes of the SustainabilityItem object"""
