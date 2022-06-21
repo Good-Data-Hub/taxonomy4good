@@ -18,12 +18,12 @@ used in multiple forms of reporting, social communicative exchange, and other su
 - [Use Cases](#use-cases)
 - [Installation](#installation)
 - [Quick Tour](#quick-tour)
-  * [Create from existing taxonomy](#create-from-existing-taxonomy)
-  * [Get all terms](#get-all-terms)
-  * [Scoring example](#scoring-example)
+  * [Use existing taxonomy](#use-existing-taxonomy)
+  * [Create custom taxonomy](#create-custom-taxonomy)
+  * [Get all items and terms](#get-all-items-and-terms)
+  * [Update and compute scores](#update-and-compute-scores)
   * [Finding children](#finding-children)
-  * [Who is the parents](#who-is-the-parents)
-  * [Custom taxonomy](#custom-taxonomy)
+  * [Who is the parent](#who-is-the-parent)
   * [Import your own taxonomy](#import-your-own-taxonomy)
 - [Overview of all functions](#overview-of-all-functions)
 - [Join the Community](#join-the-community)
@@ -89,7 +89,7 @@ Here is the list of the current available taxonomies:
 | `esg_taxonomy`        | ESG standard taxonomy                          |
 | `en_full_lexicon`     | Structure of the entire sustainability lexicon |
 
-### Create Custom taxonomy
+### Create custom taxonomy
 You can also create a custom taxonomy from scratch using `SustainabilityItem` objects, then initialize one of the items 
 as a root item to a newly created `SustainabilityTaxonomy`.
 ```python
@@ -137,7 +137,7 @@ The resulting terms are shown in the following snippet.
 >>> print(all_terms)
 ['New Taxonomy', 'item1', 'item2', 'item3', 'item4']
 ```
-### Search Terms
+### Search terms
 You can also search for terms by providing a substring. This can help get relevant terms from `en_full_taxonomy`, 
 providing you with the most similar sustainability terms that will help query textual data from various APIs and extend 
 ML and NLP tasks.
@@ -150,7 +150,7 @@ The resulting terms are:
 >>> print(resulting_terms)
 ['item1', 'item2', 'item3', 'item4', 'item5', 'item6']
 ```
-### Update and Compute Scores
+### Update and compute scores
 Scores and weights can be updated using an external API or imported from an Excel sheet with the taxonomy.
 The following is an alternative way to update the scores programmatically
 ```python
@@ -196,7 +196,7 @@ root_children_names = [child.name for child in root_children]
 >>> print(root_children_names)
 ['item1', 'item2']
 ```
-### Who is the parents
+### Who is the parent
 ```python
 item_parent = all_items[1].parent
 ```
