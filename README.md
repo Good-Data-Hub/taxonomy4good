@@ -1,12 +1,12 @@
 
 # Lexicon4Good
-
+<br/><br/>
 <p align="center">
     <a href="https://goodbucks.darkm.co/" target="_blank">
        <img  src="./images/gooddatahub-logo.svg" alt="Taxonomy Example" width="60%"/>
     </a>
 </p>
-
+<br/><br/>
 Through the help of academics, professionals, and activists, GOOD DATA HUB has created a sustainability lexicon for terms
 used in multiple forms of reporting, social communicative exchange, and other sustainability contexts.
 
