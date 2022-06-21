@@ -2,7 +2,7 @@
 # Lexicon4Good
 
 <p align="center">
-    <a href="https://goodbucks.darkm.co/">
+    <a href="https://goodbucks.darkm.co/" target="_blank">
        <img  src="./images/gooddatahub-logo.svg" alt="Taxonomy Example" width="50%"/>
     </a>
 </p>
