@@ -87,7 +87,7 @@ Here is the list of the current available taxonomies:
 | `world_bank_taxonomy` | World Bank taxonomy                            |
 | `china_taxonomy`      | China Taxonomy                                 |
 | `esg_taxonomy`        | ESG standard taxonomy                          |
-| `en_full_lexicon`     | Structure of the entire sustainability lexicon |
+| `en_master_lexicon`   | Structure of the entire sustainability lexicon |
 
 ### Create custom taxonomy
 You can also create a custom taxonomy from scratch using `SustainabilityItem` objects, then initialize one of the items 
