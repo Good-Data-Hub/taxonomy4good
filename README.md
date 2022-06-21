@@ -66,7 +66,7 @@ machine learning, NLP and ESG reporting.
 You can install sustainability lexicon using the following command:
 
 ```
-pip install lexicon4good
+pip install taxonomy4good
 ```
 
 ## Quick Tour
