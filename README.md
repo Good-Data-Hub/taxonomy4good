@@ -310,4 +310,3 @@ Join our slack community to start collaborating and exchanging with GOOD DATA HU
 specialists!
 
 ## References
->>>>>>> Stashed changes
