@@ -3,7 +3,7 @@
 <br/><br/>
 <p align="center">
     <a href="https://goodbucks.darkm.co/" target="_blank">
-       <img  src="./images/gooddatahub-logo.svg" alt="Taxonomy Example" width="60%"/>
+       <img  src="./images/gooddatahub-logo.svg" alt="Good Data Hub" width="60%"/>
     </a>
 </p>
 <br/><br/>
@@ -309,4 +309,4 @@ Note how `meta_data` stored the additional columns introduced in the Excel file.
 Join our slack community to start collaborating and exchanging with GOOD DATA HUB team, data scientists and sustainability
 specialists!
 
-## References
+
