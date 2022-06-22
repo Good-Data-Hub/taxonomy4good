@@ -29,20 +29,6 @@ class TestItems(unittest.TestCase):
     def test_item_dict(self):
         self.assertEqual(item1.to_dict(), item1_dict)
 
-    @pytest.fixture(autouse=True)
-    def _pass_fixtures(self, capsys):
-        self.capsys = capsys
-
-    def test_print_root_details(self):
-        root.details()
-        printed_text = self.capsys.readouterr()
-        self.assertEqual(root_details, printed_text.out)
-
-    def test_print_item_details(self):
-        item1.details()
-        printed_text = self.capsys.readouterr()
-        self.assertEqual(item1_details, printed_text.out)
-
     def test_update_score(self):
         with self.subTest():
             self.assertEqual(item1.score, 0)
