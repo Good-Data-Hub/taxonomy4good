@@ -118,7 +118,7 @@ class SustainabilityTaxonomy:
         :param start_root: starting node of subtree (default: root of taxonomy4good)
         :type start_root: SustainabilityItem
         :returns: SustainabilityItem list for each level
-        :rtype: numpy array
+        :rtype: numpy.array
         """
 
         # if no root is specified, set the root of the taxonomy4good as starting root
@@ -153,7 +153,7 @@ class SustainabilityTaxonomy:
         :param level: desired level of the taxonomy4good we wish to extract items from
         :type level: int
         :returns: list of items in the specified level
-        :rtype: numpy array
+        :rtype: numpy.array
         """
 
         return self.get_items_each_level(self.root)[level]
@@ -165,7 +165,7 @@ class SustainabilityTaxonomy:
                            to get items from (default: root of the entire taxonomy4good)
         :type start_root: SustainabilityItem
         :returns: all the items of the taxonomy4good
-        :rtype: np array (SustainabilityItem)
+        :rtype: numpy.array (SustainabilityItem)
         """
 
         # if no root is specified, set the root of the taxonomy4good as starting root
@@ -183,7 +183,7 @@ class SustainabilityTaxonomy:
                            to get terms from (default: root of the entire taxonomy4good)
         :type start_root: SustainabilityItem
         :returns: all the terms of the taxonomy4good
-        :rtype: np array (str)
+        :rtype: numpy.array (str)
         """
 
         # extract all items first, then return the name attributes
@@ -197,7 +197,7 @@ class SustainabilityTaxonomy:
                            to get ids from (default: root of the entire taxonomy4good)
         :type start_root: SustainabilityItem
         :returns: all the terms of the taxonomy4good
-        :rtype: np array (int)
+        :rtype: numpy.array (int)
         """
 
         # if no root is specified, set the root of the taxonomy4good as starting root
@@ -517,7 +517,7 @@ class SustainabilityTaxonomy:
                           from (default: root of the overall taxonomy4good)
         :type start_root: SustainabilityItem
         :returns: items having the name attributes partially similar to terms
-        :rtype: numpy array of SustainabilityItems
+        :rtype: numpy.array of SustainabilityItems
         """
 
         if start_root is None:
@@ -548,7 +548,7 @@ class SustainabilityTaxonomy:
                           from (default: root of the overall taxonomy4good)
         :type start_root: SustainabilityItem
         :returns: terms partially similar to terms
-        :rtype: numpy array of str
+        :rtype: numpy.array of str
         """
         if start_root is None:
             start_root = self.root
