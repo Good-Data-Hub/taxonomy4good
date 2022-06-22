@@ -12,7 +12,7 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../..'))
+sys.path.insert(0, os.path.abspath('..'))
 
 # -- Project information -----------------------------------------------------
 
@@ -27,7 +27,6 @@ author = 'Good Data Hub'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 
-master_doc = 'contents'
 extensions = [
     'recommonmark',
     'sphinx.ext.autodoc',
