@@ -11,8 +11,7 @@ install:
   - pip install -r requirements.txt
 
 script:
-  - python -m unittest tests/test_sustainabilityitem.py
-  - python -m unittest tests/test_sustainabilitytaxonomy.py
+  - python -m unittest
 
 deploy:
   provider: pypi
