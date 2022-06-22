@@ -27,7 +27,7 @@ author = 'Good Data Hub'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 
-master_doc = 'index'
+master_doc = 'contents'
 extensions = [
     'recommonmark',
     'sphinx.ext.autodoc',
