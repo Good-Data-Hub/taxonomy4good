@@ -15,7 +15,7 @@ with open(path.join(HERE, 'README.md'), encoding='utf-8') as f:
 # This call to setup() does all the work
 setup(
     name="taxonomy4good",
-    version="0.1.0",
+    version="1.0.0",
     description="Sustainability lexicon providing both listed and non-listed taxonomies",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -37,7 +37,8 @@ setup(
         "Programming Language :: Python :: 3.9",
         "Operating System :: OS Independent"
     ],
-    packages=["taxonomy4good"],
+    packages=["taxonomy4good", "images"],
     include_package_data=True,
+    package_data={'taxonomy4good': ['taxonomies/*.xlsx'], 'images': ['*.svg', '*.png']},
     install_requires=["numpy", "pandas", "xlrd==1.2.0"]
 )

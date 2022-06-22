@@ -618,9 +618,26 @@ class SustainabilityTaxonomy:
 
 
 def from_file(filepath, version_name="Standard Taxonomy", version_num="0.1.0", filetype='excel', meta=False):
+    """Create a taxonomy from existing file. This can be a builtin taxonomy in taxonomy4good or a newly created one.
+
+    :param filepath: the path of the file describing the structure of taxonomy or the name of builtin taxonomy.
+    :type filepath: str
+    :param version_name: the name of the taxonomy
+    :type version_name: str
+    :param version_num: the number of the taxonomy version
+    :type version_num: str
+    :param filetype: the type of the file (excel or json)
+    :type filetype: str
+    :param meta: indicating if the file include meta-data
+    :type meta: bool
+
+    :returns: create taxonomy from the indicated file
+    :rtype: SustainabilityTaxonomy
+    """
     root = SustainabilityItem(id=0, name=version_name)
 
     if filetype == 'excel':
+        # if the name corresponds to one of the existing taxonomies, get file from taxonomies directory
         if filepath in BUILTIN_TAXONOMIES:
             root.name = TAXONOMIES_DESC[filepath]
             items_df = pd.read_excel(os.path.dirname(os.path.abspath(__file__)) + "/taxonomies/" + filepath + ".xlsx")
@@ -636,6 +653,7 @@ def from_file(filepath, version_name="Standard Taxonomy", version_num="0.1.0", f
 
     items = [root]
 
+    # Consider any additional columns as meta-data
     all_columns = items_df.columns
     meta_data_col = [col for col in all_columns
                      if col not in ["id", "name", "level", "grouping",
@@ -643,7 +661,7 @@ def from_file(filepath, version_name="Standard Taxonomy", version_num="0.1.0", f
 
     # create sustainability items
     for item in items_df.to_dict('records'):
-        # create item
+        # create item with respective attributes
         if meta:
             meta_dict = {key: item[key] for key in meta_data_col}
         else:
@@ -666,11 +684,11 @@ def from_file(filepath, version_name="Standard Taxonomy", version_num="0.1.0", f
 
             sustainability_item.parent = parent
             if not isinstance(parent.children, list):
+                # convert string list to a list
                 parent.children = ast.literal_eval(parent.children)
 
-            # print(f"parent: {parent.id}")
             for i in range(len(parent.children)):
-                # print(f"current child: {parent.children[i]}")
+
                 if sustainability_item.id == parent.children[i]:
                     child_idx = i
 

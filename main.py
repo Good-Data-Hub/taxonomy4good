@@ -1,5 +1,6 @@
-from taxonomy4good import SustainabilityTaxonomy
+from taxonomy4good import SustainabilityTaxonomy, SustainabilityItem
+from taxonomy4good import from_file
 
-esg = SustainabilityTaxonomy()
+taxo = from_file("en_master_lexicon")
 
-print(esg.version_name)
+taxo.print_hierarchy()
