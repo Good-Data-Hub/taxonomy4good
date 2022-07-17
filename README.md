@@ -81,6 +81,7 @@ Here is the list of the current available taxonomies:
 
 | Name                  | Description                                    |
 |-----------------------|------------------------------------------------|
+| `un_sdg_taxonomy`     | UN SDGs Taxonomy                               |
 | `eu_taxonomy`         | European Union Taxonomy                        |
 | `ftse_fsgi`           | FTSE for Social Good Index                     |
 | `un_sdg`              | UN Sustainable Development Goals               |
@@ -88,6 +89,7 @@ Here is the list of the current available taxonomies:
 | `china_taxonomy`      | China Taxonomy                                 |
 | `esg_taxonomy`        | ESG standard taxonomy                          |
 | `en_master_lexicon`   | Structure of the entire sustainability lexicon |
+
 
 ### Create custom taxonomy
 You can also create a custom taxonomy from scratch using `SustainabilityItem` objects, then initialize one of the items 
