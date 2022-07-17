@@ -7,7 +7,7 @@ import json
 import os
 
 BUILTIN_TAXONOMIES = ["eu_taxonomy", "ftse_fsgi", "un_sdg", "world_bank_taxonomy",
-                      "china_taxonomy", "esg_taxonomy", "en_master_lexicon"]
+                      "china_taxonomy", "esg_taxonomy", "en_master_lexicon", "un_sdg_taxonomy"]
 
 TAXONOMIES_DESC = {"eu_taxonomy": "EU Taxonomy",
                    "ftse_fsgi": "FTSE for Social Good Index",
@@ -15,7 +15,8 @@ TAXONOMIES_DESC = {"eu_taxonomy": "EU Taxonomy",
                    "world_bank_taxonomy": "World Bank Taxonomy",
                    "china_taxonomy": "China Taxonomy",
                    "esg_taxonomy": "ESG Taxonomy",
-                   "en_master_lexicon": "Full Sustainability Lexicon"}
+                   "en_master_lexicon": "Full Sustainability Lexicon",
+                   "un_sdg_taxonomy": "UN SDGs"}
 
 
 class SustainabilityTaxonomy:
