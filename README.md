@@ -304,6 +304,3 @@ Note how `meta_data` stored the additional columns introduced in the Excel file.
 | `search_similar_names(terms, start_root)`            | Search for similar names/terms in the taxonomy using a string partial match                 |
 | `items_to_dict(start_root)`                          | Convert the entire taxonomy to a dictionary (records) starting from start_root              |
 | `taxonomy_to_dict(start_root)`                       | Convert the entire taxonomy to a dictionary (structural hierarchy) starting from start_root |
-
-
-
