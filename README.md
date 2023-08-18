@@ -7,8 +7,7 @@
     </a>
 </p>
 <br/><br/>
-Through the help of academics, professionals, and activists, GOOD DATA HUB has created a sustainability lexicon for terms
-used in multiple forms of reporting, social communicative exchange, and other sustainability contexts.
+Harnessing the insights of academics, professionals, and activists, GOOD DATA HUB proudly presents Taxonomy4Good—an expansive sustainability lexicon thoughtfully compiled for a multitude of reporting styles, social interactions, and diverse sustainability domains. Empower your communication with a rich library of sustainbility standards that foster easy sustainbility data analysis 📚📊
 
 
 ## Table of Content
