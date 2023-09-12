@@ -2,7 +2,7 @@
 # Taxonomy4Good
 <br/><br/>
 <p align="center">
-    <a href="https://goodbucks.darkm.co/" target="_blank">
+    <a href="https://good-data-hub.gitbook.io/gdh-github-landing-page/" target="_blank">
        <img  src="./images/gooddatahub-logo.svg" alt="Good Data Hub" width="60%"/>
     </a>
 </p>
