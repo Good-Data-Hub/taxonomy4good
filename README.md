@@ -7,7 +7,11 @@
     </a>
 </p>
 <br/><br/>
-Harnessing the insights of academics, professionals, and activists, GOOD DATA HUB proudly presents Taxonomy4Good—an expansive sustainability lexicon thoughtfully compiled for a multitude of reporting styles, social interactions, and diverse sustainability domains. Empower your communication with a rich library of sustainbility standards that foster easy sustainbility data analysis 📚📊
+At Good Data Hub our mission is to empower impact driven companies with simple tools that provide the highest quality of data and reporting. 
+
+Analysis of unstructured sustainability data is arduous, time consuming and expensive. 
+Our goal is to reduce the barriers of accessing, processing and analyzing sustainability data by providing an open-source sustainability lexicon. We are committed to developing tools that enhance the efficiency and practicality of working with such data. 
+ 📚📊
 
 
 ## Table of Content
@@ -33,11 +37,14 @@ The goal of this is to allow everybody to understand how each entity presents th
 use of words and structure of hierarchy when it comes to representing sustainability. 
 
 ## What are Taxonomies
-Taxonomy is the practice and science of categorization or classification. A taxonomy (or taxonomical classification) is
-a scheme of classification, especially a hierarchical classification, in which things are organised into groups or types.
-In this library, we aim to provide organizations, scientists, and activists with a single source of truth to various
-listed and non-listed taxonomies. These data structures can be leveraged in several sustainability initiatives such as 
-machine learning, NLP and ESG reporting.
+Taxonomy is the practice and science of categorization or classification. A taxonomy (or taxonomical classification) is a scheme of classification, specifically a hierarchical categorization and organization of data into distinct classes or groups based on shared characteristics.
+
+## #Taxonomy4Good
+Taxonomy4good, is the first open-source library for ESG and Sustainability standards and taxonomies. This lexicon is a centralized repository for the most prominent sustainability/ESG standards in code form, ready for data labeling and for use with an API to query relevant data. Users can seamlessly integrate the provided taxonomies into their workflow, or create a custom taxonomy to form a reporting structure for existing sustainability scoring models. 
+
+## Analysing Results 
+A good taxonomy provides a strong signal to investors and other stakeholders and assists their decision making by identifying the non-financial benefits of a given asset. It should mitigate so-called “greenwashing” – the generation of apparent sustainability benefits that are nonexistent in practice.3 By contrast, taxonomies are not designed for risk management purposes. For instance, to provide a comprehensive assessment of exposures to climate-related risks, would require taking into account interdependencies with investors’ and entities’ other portfolio holdings, as well as a deeper analysis of the financial impact of possible future shocks. Taxonomies classify a single asset and therefore cannot take into account interdependencies with other assets. Rather, risk management tools such as scenario analysis and stress tests should be integrated into the standard financial risk measures widely in used by both central banks and financial market
+
 
 ## Use Cases
 
