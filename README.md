@@ -7,69 +7,23 @@
     </a>
 </p>
 <br/><br/>
-At Good Data Hub our mission is to empower impact driven companies with simple tools that provide the highest quality of data and reporting. 
-
+Good Data Hub empowers impact driven companies with simple tools that provide the highest quality of data and reporting. 
+<br/><br/>
 Analysis of unstructured sustainability data is arduous, time consuming and expensive. 
 Our goal is to reduce the barriers of accessing, processing and analyzing sustainability data by providing an open-source sustainability lexicon. We are committed to developing tools that enhance the efficiency and practicality of working with such data. 
- 📚📊
+
+ <br/><br/>
+Taxonomy4good is the first open-source library for ESG and Sustainability standards and taxonomies. 
 
 
-## Table of Content
-
-- [Aim](#aim)
-- [What are Taxonomies](#what-are-taxonomies)
-- [Use Cases](#use-cases)
-- [Installation](#installation)
-- [Quick Tour](#quick-tour)
-  * [Use existing taxonomy](#use-existing-taxonomy)
-  * [Create custom taxonomy](#create-custom-taxonomy)
-  * [Get all items and terms](#get-all-items-and-terms)
-  * [Update and compute scores](#update-and-compute-scores)
-  * [Finding children](#finding-children)
-  * [Who is the parent](#who-is-the-parent)
-  * [Import your own taxonomy](#import-your-own-taxonomy)
-- [Overview of all functions](#overview-of-all-functions)
-- [Join the Community](#join-the-community)
-- [References](#references)
-## Aim
-The aim is to bring all facets of sustainable communication in its multiple forms and style into a central place.
-The goal of this is to allow everybody to understand how each entity presents their sustainability reporting,
-use of words and structure of hierarchy when it comes to representing sustainability. 
-
-## What are Taxonomies
+## What are Taxonomies?
 Taxonomy is the practice and science of categorization or classification. A taxonomy (or taxonomical classification) is a scheme of classification, specifically a hierarchical categorization and organization of data into distinct classes or groups based on shared characteristics.
 
 ## #Taxonomy4Good
-Taxonomy4good, is the first open-source library for ESG and Sustainability standards and taxonomies. This lexicon is a centralized repository for the most prominent sustainability/ESG standards in code form, ready for data labeling and for use with an API to query relevant data. Users can seamlessly integrate the provided taxonomies into their workflow, or create a custom taxonomy to form a reporting structure for existing sustainability scoring models. 
+Taxonomy4good is the first and only centralized repository for Sustainability and ESG standards in code form, ready for data labeling and for use with an API to query relevant data. These data structures can also be leveraged in ML and NLP for ESG/Sustainability reporting and data processing. Users can seamlessly integrate the provided taxonomies into their workflow, or create a custom taxonomy to form a reporting structure for existing sustainability scoring models. 
 
-## Analysing Results 
-A good taxonomy provides a strong signal to investors and other stakeholders and assists their decision making by identifying the non-financial benefits of a given asset. It should mitigate so-called “greenwashing” – the generation of apparent sustainability benefits that are nonexistent in practice.3 By contrast, taxonomies are not designed for risk management purposes. For instance, to provide a comprehensive assessment of exposures to climate-related risks, would require taking into account interdependencies with investors’ and entities’ other portfolio holdings, as well as a deeper analysis of the financial impact of possible future shocks. Taxonomies classify a single asset and therefore cannot take into account interdependencies with other assets. Rather, risk management tools such as scenario analysis and stress tests should be integrated into the standard financial risk measures widely in used by both central banks and financial market
-
-
-## Use Cases
-
-1. The Lexicon as means to centralise Taxonomies of sustainability
-   - Often Taxonomies are hard to locate on web search and company pages. We have allowed for the lexicon to be the
-   central base for all existing taxonomies and all possible sustainability terms.
-   - Taxonomies can be used to understand sustainability practice in certain regions and organisations.
-   - Taxonomies can be created to see if the open source community could adopt them and continue to create enriched 
-   methods towards sustainability.
-2. ML and Topic Modelling
-   - Can be utilised in Natural Language Processing and hierarchical topic modelling for creating methods to organise, understand
-   and summarise large collections of textual information.
-3. Creating and refining Lists of words around impact and sustainability
-   - Adding of words to the master taxonomies or updating current taxonomies that can be used for topic modelling around
-   sustainability and NLP.
-4. Creating custom taxonomies
-   - Create new taxonomies that can be adopted by the open source community and inspire new topic models, reporting 
-   standards and other sustainability NLP tasks.
-5. Scoring and search terms from pre-existing API’s
-   - Use the provided taxonomies, or create new ones, to connect with your existing sustainability scoring model. 
-   - Search for similar sustainability words/expressions, taxonomies, and even variations of lexicons that preexist in
-   the library to query from different APIs
 
 ## Installation
-You can install sustainability lexicon using the following command:
 
 ```
 pip install taxonomy4good
@@ -83,7 +37,7 @@ To use an existing taxonomy, e.g. `ftse_fsgi`, you can import it directly as fol
 from taxonomy4good import from_file
 ftse_builtin_taxonomy = from_file("ftse_fsgi")
 ```
-Here is the list of the current available taxonomies:
+Available Taxonomies:
 
 | Name                  | Description                                    |
 |-----------------------|------------------------------------------------|
@@ -98,7 +52,7 @@ Here is the list of the current available taxonomies:
 
 
 ### Create custom taxonomy
-You can also create a custom taxonomy from scratch using `SustainabilityItem` objects, then initialize one of the items 
+Create a custom taxonomy from scratch using `SustainabilityItem` objects, then initialize one of the items 
 as a root item to a newly created `SustainabilityTaxonomy`.
 ```python
 from taxonomy4good import SustainabilityTaxonomy, SustainabilityItem
@@ -118,7 +72,7 @@ custom_taxonomy = SustainabilityTaxonomy(root, version_name="Custom Taxonomy")
 
 custom_taxonomy.print_hierarchy()
 ```
-You can see the resulting taxonomy as follows.
+See the resulting taxonomy as follows.
 ```
 >>> custom_taxonomy.print_hierarchy()
 New Taxonomy : 0
@@ -132,7 +86,7 @@ New Taxonomy : 0
         └───── item6 : 0
 ```
 ### Get all items and terms
-In order to get all the items and terms of the taxonomy, you can use the following lines.
+To get all the items and terms of the taxonomy use the following lines.
 ```python
 # list of all SustainabilityItem objects
 all_items = custom_taxonomy.get_items()
@@ -146,7 +100,7 @@ The resulting terms are shown in the following snippet.
 ['New Taxonomy', 'item1', 'item2', 'item3', 'item4']
 ```
 ### Search terms
-You can also search for terms by providing a substring. This can help get relevant terms from `en_full_taxonomy`, 
+Search for terms by providing a substring. This can help get relevant terms from `en_full_taxonomy`, 
 providing you with the most similar sustainability terms that will help query textual data from various APIs and extend 
 ML and NLP tasks.
 ```python
@@ -176,7 +130,7 @@ all_items[6].weight = 0.5
 # compute score
 root_score = custom_taxonomy.compute_scores()
 ```
-We can the result of the updates in the following snippet.
+Get the result of the updates in the following snippet.
 ```
 >>> print(root_score)
 
@@ -215,7 +169,7 @@ New Taxonomy
 ```
 
 ### Import your own taxonomy
-You can create your own taxonomy on Excel and make use and make use of the provided data structure `SustainabilityTaxonomy`.
+Ceate your own taxonomy in Excel and make use of the provided data structure `SustainabilityTaxonomy`.
 The items of this data structure must include the following columns (attributes): `id`,`name`,`level`, `grouping`,
  `parent`,`score`, `weight`,`children`. Any other columns will be aggregated inside a dictionary called `meta_data`.\
 Feel free to enrich your taxonomy with additional attributes!\
@@ -262,7 +216,7 @@ Standard Taxonomy : 0
                └───── Donations : 0
                └───── Community Outreach : 0
 ```
-To check what are the different attributes of a certain item you can search for the item by `id` or by `name` as follows.
+To check the attributes of an item search for the item by `id` or by `name` as follows.
 ```python
 social_item = example.search_items_by_name("Social")[0]
 ```
