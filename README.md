@@ -22,6 +22,15 @@ Taxonomy is the practice and science of categorization or classification. A taxo
 ## #Taxonomy4Good
 Taxonomy4good is the first and only centralized repository for Sustainability and ESG standards in code form, ready for data labeling and for use with an API to query relevant data. These data structures can also be leveraged in ML and NLP for ESG/Sustainability reporting and data processing. Users can seamlessly integrate the provided taxonomies into their workflow, or create a custom taxonomy to form a reporting structure for existing sustainability scoring models. 
 
+### Use Cases
+ 
+1. Use with an API
+2. Data Tagging
+3. ML and Topic Modeling 
+4. Supervised aspect based sentiment analysis 
+5. Text classification 
+6. Keyword extraction
+
 
 ## Installation
 
