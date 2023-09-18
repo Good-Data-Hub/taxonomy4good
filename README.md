@@ -3,7 +3,7 @@
 <br/><br/>
 <p align="center">
     <a href="https://good-data-hub.gitbook.io/gdh-github-landing-page/" target="_blank">
-       <img  src="./images/gooddatahub-logo.svg" alt="Good Data Hub" width="60%"/>
+       <img  src="./images/gooddatahub-logo.jpeg" alt="Good Data Hub" width="60%"/>
     </a>
 </p>
 <br/><br/>
