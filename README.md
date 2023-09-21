@@ -277,6 +277,9 @@ Note how `meta_data` stored the additional columns introduced in the Excel file.
 | `taxonomy_to_dict(start_root)`                       | Convert the entire taxonomy to a dictionary (structural hierarchy) starting from start_root |
 ## Community
 Join our community of sustainability data scientists and ML enthusiasts. 
+
 🌟 Leave a star on our GitHub.
+
 🐞 Report bugs with GitHub Issues
+
 🔗 Follow us on Linkedin
