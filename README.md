@@ -276,7 +276,7 @@ Note how `meta_data` stored the additional columns introduced in the Excel file.
 | `items_to_dict(start_root)`                          | Convert the entire taxonomy to a dictionary (records) starting from start_root              |
 | `taxonomy_to_dict(start_root)`                       | Convert the entire taxonomy to a dictionary (structural hierarchy) starting from start_root |
 ## Community
-Join our community of sustainability data scientists and ML enthusiasts. 
+Join Good Data Hub's community of sustainability data scientists and ML enthusiasts. 
 
 🌟 Leave a star on our [GitHub](https://github.com/GoodDataHub/taxonomy4good).
 
