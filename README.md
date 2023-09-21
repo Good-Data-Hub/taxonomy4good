@@ -278,8 +278,8 @@ Note how `meta_data` stored the additional columns introduced in the Excel file.
 ## Community
 Join our community of sustainability data scientists and ML enthusiasts. 
 
-🌟 Leave a star on our GitHub.
+🌟 Leave a star on our [GitHub](https://github.com/GoodDataHub/taxonomy4good).
 
-🐞 Report bugs with GitHub Issues
+🐞 Report bugs with [GitHub Issues](https://github.com/GoodDataHub/taxonomy4good/issues).
 
-🔗 Follow us on Linkedin
+🔗 Follow us on [Linkedin](https://www.linkedin.com/company/81945779/admin/feed/posts/).
