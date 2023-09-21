@@ -7,7 +7,7 @@
     </a>
 </p>
 <br/><br/>
-Good Data Hub empowers impact driven companies with simple tools that provide the highest quality of data and reporting. 
+Good Data Hub empowers impact driven data scientists with simple tools that provide the highest quality of data and reporting. 
 <br/><br/>
 Analysis of unstructured sustainability data is arduous, time consuming and expensive. 
 Our goal is to reduce the barriers of accessing, processing and analyzing sustainability data by providing an open-source sustainability lexicon. We are committed to developing tools that enhance the efficiency and practicality of working with such data. 
@@ -275,3 +275,8 @@ Note how `meta_data` stored the additional columns introduced in the Excel file.
 | `search_similar_names(terms, start_root)`            | Search for similar names/terms in the taxonomy using a string partial match                 |
 | `items_to_dict(start_root)`                          | Convert the entire taxonomy to a dictionary (records) starting from start_root              |
 | `taxonomy_to_dict(start_root)`                       | Convert the entire taxonomy to a dictionary (structural hierarchy) starting from start_root |
+## Community
+Join our community of sustainability data scientists and ML enthusiasts. 
+🌟 Leave a star on our GitHub.
+🐞 Report bugs with GitHub Issues
+🔗 Follow us on Linkedin
