@@ -15,7 +15,7 @@ with open(path.join(HERE, 'README.md'), encoding='utf-8') as f:
 # This call to setup() does all the work
 setup(
     name="taxonomy4good",
-    version="1.2.2",
+    version="1.2.3",
     description="Sustainability lexicon providing both listed and non-listed taxonomies",
     long_description=long_description,
     long_description_content_type="text/markdown",
