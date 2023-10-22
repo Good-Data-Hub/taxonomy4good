@@ -16,6 +16,12 @@ Our goal is to reduce the barriers to accessing, processing, and analyzing susta
 Taxonomy4good is the first open-source library for ESG and Sustainability standards and taxonomies. 
 
 ## Organizations that trust us
+
+<div align="center">
+    <img src="images/setsqrd.png" width="400" />
+    <img src="images/exeter_uni.png" width="400" />
+</div>
+
 <div style="display: flex; justify-content: space-between;">
     <div style="flex-basis: 48%;">
         <img src="images/setsqrd.png" alt="Setsquared Exeter" width="35%">
