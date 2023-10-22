@@ -18,8 +18,12 @@ Taxonomy4good is the first open-source library for ESG and Sustainability standa
 ## Organizations that trust us
 
 <div align="center">
-    <img src="images/setsqrd.jpeg" width="400" />
-    <img src="images/exeter_uni.png" width="400" />
+    <a href="https://businessacceleration.exeter.ac.uk/#home" target="_blank">
+        <img src="images/setsqrd.jpeg" width="400" />
+    </a>
+    <a href="https://www.exeter.ac.uk/" target="_blank">
+        <img src="images/exeter_uni.png" width="400" />
+    </a>
 </div>
 
 
