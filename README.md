@@ -7,17 +7,17 @@
     </a>
 </p>
 <br/><br/>
-Good Data Hub empowers impact driven data scientists with simple tools that provide the highest quality of data and reporting. 
+Good Data Hub empowers impact-driven data scientists with simple tools that provide the highest quality of data and reporting. 
 <br/><br/>
-Analysis of unstructured sustainability data is arduous, time consuming and expensive. 
-Our goal is to reduce the barriers of accessing, processing and analyzing sustainability data by providing an open-source sustainability lexicon. We are committed to developing tools that enhance the efficiency and practicality of working with such data. 
+Analysis of unstructured sustainability data is arduous, time-consuming, and expensive. 
+Our goal is to reduce the barriers to accessing, processing, and analyzing sustainability data by providing an open-source sustainability lexicon. We are committed to developing tools that enhance the efficiency and practicality of working with such data. 
 
  <br/><br/>
 Taxonomy4good is the first open-source library for ESG and Sustainability standards and taxonomies. 
 
 ## Organizations that trust us
 
-<div style="display: flex;">
+<div style="float:left;">
     <img src="images/setsqrd.png" alt="Setsquared Exeter" style="max-width: 35%;">
     <img src="images/exeter_uni.png" alt="Exeter University" style="max-width: 35%;">
 </div>
