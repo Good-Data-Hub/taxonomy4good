@@ -18,8 +18,12 @@ Taxonomy4good is the first open-source library for ESG and Sustainability standa
 ## Organizations that trust us
 
 <div style="float:left;">
-    <img src="images/setsqrd.png" alt="Setsquared Exeter" style="max-width: 35%;">
-    <img src="images/exeter_uni.png" alt="Exeter University" style="max-width: 35%;">
+    <div style="max-width: 35%;">
+    <img src="images/setsqrd.png" alt="Setsquared Exeter">
+    </div>
+    <div style="max-width: 35%;">
+    <img src="images/exeter_uni.png" alt="Exeter University">
+    </div>
 </div>
 
 ## What are Taxonomies?
