@@ -15,11 +15,20 @@ Our goal is to reduce the barriers of accessing, processing and analyzing sustai
  <br/><br/>
 Taxonomy4good is the first open-source library for ESG and Sustainability standards and taxonomies. 
 
+## Organizations that trust us
+<div class="row">
+  <div class="column">
+    <img src="images/setsqrd.png" alt="Setsquared Exeter" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="images/exeter_uni.png" alt="Exeter University" style="width:100%">
+  </div>
+</div>
 
 ## What are Taxonomies?
 Taxonomy is the practice and science of categorization or classification. A taxonomy (or taxonomical classification) is a scheme of classification, specifically a hierarchical categorization and organization of data into distinct classes or groups based on shared characteristics.
 
-## #Taxonomy4Good
+## Taxonomy4Good
 Taxonomy4good is the first and only centralized repository for Sustainability and ESG standards in code form, ready for data labeling and for use with an API to query relevant data. These data structures can also be leveraged in ML and NLP for ESG/Sustainability reporting and data processing. Users can seamlessly integrate the provided taxonomies into their workflow, or create a custom taxonomy to form a reporting structure for existing sustainability scoring models. 
 
 ### Use Cases
