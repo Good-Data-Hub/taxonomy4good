@@ -22,23 +22,6 @@ Taxonomy4good is the first open-source library for ESG and Sustainability standa
     <img src="images/exeter_uni.png" width="400" />
 </div>
 
-<div style="display: flex; justify-content: space-between;">
-    <div style="flex-basis: 48%;">
-        <img src="images/setsqrd.png" alt="Setsquared Exeter" width="35%">
-    </div>
-    <div style="flex-basis: 48%;">
-        <img src="images/exeter_uni.png" alt="Exeter University" width="35%">
-    </div>
-</div>
-
-<div style="display: flex;">
-    <div style="max-width: 35%;">
-    <img src="images/setsqrd.png" alt="Setsquared Exeter" width="35%">
-    </div>
-    <div style="max-width: 35%;">
-    <img src="images/exeter_uni.png" alt="Exeter University" width="35%">
-    </div>
-</div>
 
 ## What are Taxonomies?
 Taxonomy is the practice and science of categorization or classification. A taxonomy (or taxonomical classification) is a scheme of classification, specifically a hierarchical categorization and organization of data into distinct classes or groups based on shared characteristics.
