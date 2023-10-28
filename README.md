@@ -61,10 +61,9 @@ Available Taxonomies:
 
 | Name                  | Description                                    |
 |-----------------------|------------------------------------------------|
-| `un_sdg_taxonomy`     | UN SDGs Taxonomy                               |
+| `un_sdg_taxonomy`     | UN Sustainable Development Goals Taxonomy      |
 | `eu_taxonomy`         | European Union Taxonomy                        |
 | `ftse_fsgi`           | FTSE for Social Good Index                     |
-| `un_sdg`              | UN Sustainable Development Goals               |
 | `world_bank_taxonomy` | World Bank taxonomy                            |
 | `china_taxonomy`      | China Taxonomy                                 |
 | `esg_taxonomy`        | ESG standard taxonomy                          |
