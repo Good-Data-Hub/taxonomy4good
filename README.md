@@ -283,7 +283,7 @@ Note how `meta_data` stored the additional columns introduced in the Excel file.
 | `similar_items_byid(ids)`                            | Gives the items under the same parent as items having the specified ids                     |
 | `search_items_by_name(terms, start_root)`            | Look for similar SustainabilityItems using a string partial match                           |
 | `search_similar_names(terms, start_root)`            | Search for similar names/terms in the taxonomy using a string partial match                 |
-| `items_to_dict(start_root)`                          | Convert the entire taxonomy to a dictionary (records) starting from start_root              |
+| `items_to_dict(start_root)`                          | Convert the entire taxonomy to a list of dictionaries (records) starting from start_root    |
 | `taxonomy_to_dict(start_root)`                       | Convert the entire taxonomy to a dictionary (structural hierarchy) starting from start_root |
 ## Community
 Join Good Data Hub's community of sustainability data scientists and ML enthusiasts. 
