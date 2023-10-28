@@ -292,4 +292,4 @@ Join Good Data Hub's community of sustainability data scientists and ML enthusia
 
 🐞 Report bugs with [GitHub Issues](https://github.com/GoodDataHub/taxonomy4good/issues).
 
-🔗 Follow us on [Linkedin](https://www.linkedin.com/company/81945779/admin/feed/posts/).
+🔗 Follow us on [LinkedIn](https://www.linkedin.com/company/81945779/admin/feed/posts/).
