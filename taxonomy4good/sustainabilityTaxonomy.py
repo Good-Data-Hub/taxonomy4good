@@ -2,6 +2,7 @@ from .errors import IDNotFoundError, EmptyTaxonomyError, FileTypeNotSupportedErr
 from .sustainabilityItem import SustainabilityItem
 import pandas as pd
 import numpy as np
+import requests
 import ast
 import json
 import os
@@ -31,23 +32,53 @@ class SustainabilityTaxonomy:
     """
 
     def __init__(self, root=None,
+                 taxonomy_name="esg_taxonomy",
                  version_name='Standard Taxonomy',
-                 version_num='0.1.0'):
-        if root is None:
+                 version_num='0.1.0',
+                 api_key=None):
 
-            # default: ESG Taxonomy
-            full_lexicon = from_file(filepath="esg_taxonomy",
-                                     version_name=TAXONOMIES_DESC["esg_taxonomy"],
-                                     version_num=version_num,
-                                     filetype='excel',
-                                     meta=True)
-            self.root = full_lexicon.root
-            self.version_name = full_lexicon.version_name
-            self.version_num = full_lexicon.version_num
+        self._host = "https://86rwxza410.execute-api.us-east-1.amazonaws.com"
+        self._stage = "/sbx"
+        self._resource = "/taxonomies"
+        self._endpoint_suffix = "/get-taxonomy"
+
+        if api_key is not None:
+            if taxonomy_name in BUILTIN_TAXONOMIES:
+                self._api_key = api_key
+                api_url = self._host + self._stage + self._resource + self._endpoint_suffix
+                headers = {
+                    "x-api-key": self._api_key,
+                    "Content-Type": "application/json"
+                }
+                data = {
+                    "taxonomy": taxonomy_name,
+                    "orient": "items"
+                }
+                response = requests.post(api_url, headers=headers, json=data)
+                if response.status_code == 200:
+                    result = json.loads(response.text)
+                    taxonomy_df = pd.DataFrame(result).sort_values("id")
+                    print(taxonomy_df.head())
+
+            else:
+                raise ValueError(
+                    "Taxonomy name provided seems to not exists. Please verify the value provided or email the team for suggestions")
         else:
-            self.root = root
-            self.version_name = version_name
-            self.version_num = version_num
+            if root is None:
+
+                # default: ESG Taxonomy
+                full_lexicon = from_file(filepath=taxonomy_name,
+                                         version_name=TAXONOMIES_DESC[taxonomy_name],
+                                         version_num=version_num,
+                                         filetype='excel',
+                                         meta=True)
+                self.root = full_lexicon.root
+                self.version_name = full_lexicon.version_name
+                self.version_num = full_lexicon.version_num
+            else:
+                self.root = root
+                self.version_name = version_name
+                self.version_num = version_num
 
     def insert_items(self, items):
         """ Insert additional items (terms/lexicons) to this existing taxonomy4good
@@ -139,7 +170,8 @@ class SustainabilityTaxonomy:
             for ci in current_items:
                 # specify next level items if current item is not leaf item
                 if ci.children is not None:
-                    next_level_items = np.concatenate([next_level_items, ci.children])
+                    next_level_items = np.concatenate(
+                        [next_level_items, ci.children])
 
             # update the state of the iteration step and update the current items to list
             items.append(np.array([ci for ci in current_items]))
@@ -365,7 +397,8 @@ class SustainabilityTaxonomy:
                         sep = "└"
                     else:
                         sep = "├"
-                    print(sep + "─────" + str(start_item.name) + " : " + str(start_item.score))
+                    print(sep + "─────" + str(start_item.name) +
+                          " : " + str(start_item.score))
                 else:
                     if islast:
                         s = " "
@@ -382,7 +415,8 @@ class SustainabilityTaxonomy:
                         islast = True
 
                     # run function again on children by passing level status
-                    self.print_hierarchy(start_item.children[idx], current_level, islast)
+                    self.print_hierarchy(
+                        start_item.children[idx], current_level, islast)
 
     def get_level_scores(self, level):
         """Compute the weighted values/scores for the specified level
@@ -451,7 +485,8 @@ class SustainabilityTaxonomy:
             if self.root.children is not None:
                 top_level_name = [child.name for child in self.root.children]
                 print(f"Top level items are {top_level_name}")
-                print(f"Top level items scores: {[item.score for item in self.root.children]}")
+                print(
+                    f"Top level items scores: {[item.score for item in self.root.children]}")
 
     def to_dataframe(self, start_root=None):
         """Convert the entire taxonomy4good to a DataFrame
@@ -610,10 +645,12 @@ class SustainabilityTaxonomy:
         if len(start_root.children) == 1:
             dict_builder = self.taxonomy_to_dict(start_root.children[0])
         else:
-            dict_builder = [self.taxonomy_to_dict(child) for child in start_root.children]
+            dict_builder = [self.taxonomy_to_dict(
+                child) for child in start_root.children]
 
         root_dict = start_root.to_dict()
-        root_dict['children'] = [dict_builder] if isinstance(dict_builder, dict) else dict_builder
+        root_dict['children'] = [dict_builder] if isinstance(
+            dict_builder, dict) else dict_builder
 
         return root_dict
 
@@ -641,14 +678,16 @@ def from_file(filepath, version_name="Standard Taxonomy", version_num="0.1.0", f
         # if the name corresponds to one of the existing taxonomies, get file from taxonomies directory
         if filepath in BUILTIN_TAXONOMIES:
             root.name = TAXONOMIES_DESC[filepath]
-            items_df = pd.read_excel(os.path.dirname(os.path.abspath(__file__)) + "/taxonomies/" + filepath + ".xlsx")
+            items_df = pd.read_excel(os.path.dirname(os.path.abspath(
+                __file__)) + "/taxonomies/" + filepath + ".xlsx")
             version_name = TAXONOMIES_DESC[filepath]
         else:
             items_df = pd.read_excel(filepath)
     elif filetype == 'json':
         items_df = pd.read_json(filepath)
     else:
-        raise FileTypeNotSupportedError(f"{filetype} is currently not supported")
+        raise FileTypeNotSupportedError(
+            f"{filetype} is currently not supported")
 
     items_df.replace({np.nan: None}, inplace=True)
 
