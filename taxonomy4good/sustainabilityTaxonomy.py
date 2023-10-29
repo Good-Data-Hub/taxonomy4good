@@ -37,12 +37,14 @@ class SustainabilityTaxonomy:
                  version_num='0.1.0',
                  api_key=None):
 
+        self._taxonomy_name = taxonomy_name
         self._host = "https://86rwxza410.execute-api.us-east-1.amazonaws.com"
         self._stage = "/sbx"
         self._resource = "/taxonomies"
         self._endpoint_suffix = "/get-taxonomy"
 
         if api_key is not None:
+            print("Using API....")
             if taxonomy_name in BUILTIN_TAXONOMIES:
                 self._api_key = api_key
                 api_url = self._host + self._stage + self._resource + self._endpoint_suffix
@@ -58,7 +60,60 @@ class SustainabilityTaxonomy:
                 if response.status_code == 200:
                     result = json.loads(response.text)
                     taxonomy_df = pd.DataFrame(result).sort_values("id")
-                    print(taxonomy_df.head())
+                    taxonomy_df.replace({np.nan: None}, inplace=True)
+                    # print(taxonomy_df.head())
+                    # root = SustainabilityItem(id=0, name=self._taxonomy_name)
+                    root = SustainabilityItem(id=result[0]['id'],
+                                              name=result[0]['name'],
+                                              level=result[0]['level'],
+                                              grouping=result[0]['grouping'],
+                                              parent=result[0]['parent'],
+                                              score=result[0]['score'],
+                                              weight=result[0]['weight'],
+                                              children=result[0]['children'],
+                                              meta_data=result[0]["meta_data"])
+                    items = [root]
+                    for item in taxonomy_df.loc[1:].to_dict('records'):
+                        # print(f"item : {item}")
+                        sustainability_item = SustainabilityItem(id=item['id'],
+                                                                 name=item['name'],
+                                                                 level=item['level'],
+                                                                 grouping=item['grouping'],
+                                                                 parent=item['parent'],
+                                                                 score=item['score'],
+                                                                 weight=item['weight'],
+                                                                 children=item['children'],
+                                                                 meta_data={})
+
+                        # if parent is not None, update parent value with SustainabilityItem
+                        # Update parent children
+                        if item['parent'] is not None:
+                            parent = items[int(item['parent'])]
+
+                            sustainability_item.parent = parent
+                            if not isinstance(parent.children, list):
+                                # convert string list to a list
+                                parent.children = ast.literal_eval(
+                                    parent.children)
+                            for i in range(len(parent.children)):
+
+                                if sustainability_item.id == parent.children[i]:
+                                    child_idx = i
+
+                            parent.children[child_idx] = sustainability_item
+
+                        else:
+                            if items[0].children is None:
+                                items[0].children = []
+                            items[0].children.append(sustainability_item)
+                            sustainability_item.parent = items[0]
+
+                        items.append(sustainability_item)
+                    self.root = items[0]
+                    self.version_name = TAXONOMIES_DESC[self._taxonomy_name]
+                    self.version_num = version_num
+                    # return SustainabilityTaxonomy(items[0], version_name, version_num)
+                    # return items[0]
 
             else:
                 raise ValueError(
