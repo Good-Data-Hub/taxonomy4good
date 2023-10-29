@@ -1,8 +1,9 @@
-from .errors import IDNotFoundError, EmptyTaxonomyError, FileTypeNotSupportedError
+from .errors import IDNotFoundError, EmptyTaxonomyError, FileTypeNotSupportedError, AuthorizationException
 from .sustainabilityItem import SustainabilityItem
 import pandas as pd
 import numpy as np
 import requests
+import logging
 import ast
 import json
 import os
@@ -44,8 +45,9 @@ class SustainabilityTaxonomy:
         self._endpoint_suffix = "/get-taxonomy"
 
         if api_key is not None:
-            print("Using API....")
             if taxonomy_name in BUILTIN_TAXONOMIES:
+                logging.info("Using API...")
+
                 self._api_key = api_key
                 api_url = self._host + self._stage + self._resource + self._endpoint_suffix
                 headers = {
@@ -58,11 +60,12 @@ class SustainabilityTaxonomy:
                 }
                 response = requests.post(api_url, headers=headers, json=data)
                 if response.status_code == 200:
+                    logging.info("Status code: 200")
+                    logging.info("Parsing taxonomy...")
                     result = json.loads(response.text)
                     taxonomy_df = pd.DataFrame(result).sort_values("id")
                     taxonomy_df.replace({np.nan: None}, inplace=True)
-                    # print(taxonomy_df.head())
-                    # root = SustainabilityItem(id=0, name=self._taxonomy_name)
+
                     root = SustainabilityItem(id=result[0]['id'],
                                               name=result[0]['name'],
                                               level=result[0]['level'],
@@ -74,7 +77,7 @@ class SustainabilityTaxonomy:
                                               meta_data=result[0]["meta_data"])
                     items = [root]
                     for item in taxonomy_df.loc[1:].to_dict('records'):
-                        # print(f"item : {item}")
+
                         sustainability_item = SustainabilityItem(id=item['id'],
                                                                  name=item['name'],
                                                                  level=item['level'],
@@ -112,12 +115,14 @@ class SustainabilityTaxonomy:
                     self.root = items[0]
                     self.version_name = TAXONOMIES_DESC[self._taxonomy_name]
                     self.version_num = version_num
+                    logging.info("Taxonomy parsed successfully.")
                     # return SustainabilityTaxonomy(items[0], version_name, version_num)
                     # return items[0]
-
+                if response.status_code == 403:
+                    raise AuthorizationException("Unauthorized: please check if you have a valid API key. If you think it's a bug please raise an issue here: https://github.com/Good-Data-Hub/taxonomy4good/issues or contact api.support@gooddatahub.co")
             else:
                 raise ValueError(
-                    "Taxonomy name provided seems to not exists. Please verify the value provided or email the team for suggestions")
+                    "Taxonomy name provided does not exist. Please verify the value provided. If you think it's a bug please raise an issue here: https://github.com/Good-Data-Hub/taxonomy4good/issues or contact api.support@gooddatahub.co for suggestions")
         else:
             if root is None:
 
@@ -749,11 +754,12 @@ def from_file(filepath, version_name="Standard Taxonomy", version_num="0.1.0", f
     items = [root]
 
     # Consider any additional columns as meta-data
-    all_columns = items_df.columns
+    all_columns = [c.lower() for c in items_df.columns]
+    print(all_columns)
     meta_data_col = [col for col in all_columns
                      if col not in ["id", "name", "level", "grouping",
                                     "parent", "score", "weight", "children"]]
-
+    items_df.columns = all_columns
     # create sustainability items
     for item in items_df.to_dict('records'):
         # create item with respective attributes
@@ -761,7 +767,7 @@ def from_file(filepath, version_name="Standard Taxonomy", version_num="0.1.0", f
             meta_dict = {key: item[key] for key in meta_data_col}
         else:
             meta_dict = {}
-
+        print(item)
         sustainability_item = SustainabilityItem(id=item['id'],
                                                  name=item['name'],
                                                  level=item['level'],

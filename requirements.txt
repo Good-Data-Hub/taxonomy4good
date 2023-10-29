@@ -1,5 +1,6 @@
 xlrd==1.2.0
 openpyxl
+requests
 pytest
 pandas
 build
