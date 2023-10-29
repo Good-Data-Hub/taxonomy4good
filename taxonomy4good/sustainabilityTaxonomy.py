@@ -124,8 +124,10 @@ class SustainabilityTaxonomy:
                 raise ValueError(
                     "Taxonomy name provided does not exist. Please verify the value provided. If you think it's a bug please raise an issue here: https://github.com/Good-Data-Hub/taxonomy4good/issues or contact api.support@gooddatahub.co for suggestions")
         else:
+            logging.info("API version is available in preview. Contact api.support@gooddatahub.co to request access!")
+            print("API version is available in preview. Contact api.support@gooddatahub.co to request access!")
             if root is None:
-
+                
                 # default: ESG Taxonomy
                 full_lexicon = from_file(filepath=taxonomy_name,
                                          version_name=TAXONOMIES_DESC[taxonomy_name],
@@ -755,7 +757,7 @@ def from_file(filepath, version_name="Standard Taxonomy", version_num="0.1.0", f
 
     # Consider any additional columns as meta-data
     all_columns = [c.lower() for c in items_df.columns]
-    print(all_columns)
+
     meta_data_col = [col for col in all_columns
                      if col not in ["id", "name", "level", "grouping",
                                     "parent", "score", "weight", "children"]]
@@ -767,7 +769,6 @@ def from_file(filepath, version_name="Standard Taxonomy", version_num="0.1.0", f
             meta_dict = {key: item[key] for key in meta_data_col}
         else:
             meta_dict = {}
-        print(item)
         sustainability_item = SustainabilityItem(id=item['id'],
                                                  name=item['name'],
                                                  level=item['level'],
