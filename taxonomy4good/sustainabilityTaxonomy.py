@@ -124,8 +124,7 @@ class SustainabilityTaxonomy:
                 raise ValueError(
                     "Taxonomy name provided does not exist. Please verify the value provided. If you think it's a bug please raise an issue here: https://github.com/Good-Data-Hub/taxonomy4good/issues or contact api.support@gooddatahub.co for suggestions")
         else:
-            logging.info("API version is available in preview. Contact api.support@gooddatahub.co to request access!")
-            print("API version is available in preview. Contact api.support@gooddatahub.co to request access!")
+            logging.warning("API version is available in preview. Contact api.support@gooddatahub.co to request access!")
             if root is None:
                 
                 # default: ESG Taxonomy
