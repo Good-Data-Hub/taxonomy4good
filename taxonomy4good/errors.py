@@ -8,3 +8,6 @@ class FileTypeNotSupportedError(Exception):
 
 class EmptyTaxonomyError(Exception):
     pass
+
+class AuthorizationException(Exception):
+    pass

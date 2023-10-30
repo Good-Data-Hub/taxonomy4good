@@ -15,14 +15,14 @@ with open(path.join(HERE, 'README.md'), encoding='utf-8') as f:
 # This call to setup() does all the work
 setup(
     name="taxonomy4good",
-    version="1.2.3",
+    version="2.0.0",
     description="Sustainability lexicon providing both listed and non-listed taxonomies",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://taxonomy4good.readthedocs.io/",
     author="Hloni Dichabe, Emily Luskind, Zwelakhe Gile, Luvo Gila, Myles Francis, Haroune Aaffoute, Anis Bouhamadouche",
-    author_email="gooddatahub@gmail.com, hlonidichabe@gmail.com, luskinde@gmail.com, zwelakhegila@gmail.com, "
-                 "luvogila@gmail.com, mxfrancis43@gmail.com, hrna2011@gmail.com,anis.bouhamadouche@outlook.com",
+    author_email="hloni@gooddatahub.co, emily@gooddatahub.co, zwe@gooddatahub.co, "
+                 "anis@gooddatahub.co",
     license="MIT",
     classifiers=[
         "Intended Audience :: Developers",
@@ -39,6 +39,7 @@ setup(
     ],
     packages=["taxonomy4good", "images"],
     include_package_data=True,
-    package_data={'taxonomy4good': ['taxonomies/*.xlsx'], 'images': ['*.svg', '*.png']},
-    install_requires=["numpy", "pandas", "xlrd==1.2.0"]
+    package_data={'taxonomy4good': [
+        'taxonomies/*.xlsx'], 'images': ['*.svg', '*.png']},
+    install_requires=["numpy", "pandas", "xlrd==1.2.0", "requests", "openpyxl"]
 )

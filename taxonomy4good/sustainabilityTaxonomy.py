@@ -1,7 +1,9 @@
-from .errors import IDNotFoundError, EmptyTaxonomyError, FileTypeNotSupportedError
+from .errors import IDNotFoundError, EmptyTaxonomyError, FileTypeNotSupportedError, AuthorizationException
 from .sustainabilityItem import SustainabilityItem
 import pandas as pd
 import numpy as np
+import requests
+import logging
 import ast
 import json
 import os
@@ -31,23 +33,113 @@ class SustainabilityTaxonomy:
     """
 
     def __init__(self, root=None,
+                 taxonomy_name="esg_taxonomy",
                  version_name='Standard Taxonomy',
-                 version_num='0.1.0'):
-        if root is None:
+                 version_num='0.1.0',
+                 api_key=None):
 
-            # default: ESG Taxonomy
-            full_lexicon = from_file(filepath="esg_taxonomy",
-                                     version_name=TAXONOMIES_DESC["esg_taxonomy"],
-                                     version_num=version_num,
-                                     filetype='excel',
-                                     meta=True)
-            self.root = full_lexicon.root
-            self.version_name = full_lexicon.version_name
-            self.version_num = full_lexicon.version_num
+        self._taxonomy_name = taxonomy_name
+        self._host = "https://86rwxza410.execute-api.us-east-1.amazonaws.com"
+        self._stage = "/sbx"
+        self._resource = "/taxonomies"
+        self._endpoint_suffix = "/get-taxonomy"
+
+        if api_key is not None:
+            if taxonomy_name in BUILTIN_TAXONOMIES:
+                logging.info("Using API...")
+
+                self._api_key = api_key
+                api_url = self._host + self._stage + self._resource + self._endpoint_suffix
+                headers = {
+                    "x-api-key": self._api_key,
+                    "Content-Type": "application/json"
+                }
+                data = {
+                    "taxonomy": taxonomy_name,
+                    "orient": "items"
+                }
+                response = requests.post(api_url, headers=headers, json=data)
+                if response.status_code == 200:
+                    logging.info("Status code: 200")
+                    logging.info("Parsing taxonomy...")
+                    result = json.loads(response.text)
+                    taxonomy_df = pd.DataFrame(result).sort_values("id")
+                    taxonomy_df.replace({np.nan: None}, inplace=True)
+
+                    root = SustainabilityItem(id=result[0]['id'],
+                                              name=result[0]['name'],
+                                              level=result[0]['level'],
+                                              grouping=result[0]['grouping'],
+                                              parent=result[0]['parent'],
+                                              score=result[0]['score'],
+                                              weight=result[0]['weight'],
+                                              children=result[0]['children'],
+                                              meta_data=result[0]["meta_data"])
+                    items = [root]
+                    for item in taxonomy_df.loc[1:].to_dict('records'):
+
+                        sustainability_item = SustainabilityItem(id=item['id'],
+                                                                 name=item['name'],
+                                                                 level=item['level'],
+                                                                 grouping=item['grouping'],
+                                                                 parent=item['parent'],
+                                                                 score=item['score'],
+                                                                 weight=item['weight'],
+                                                                 children=item['children'],
+                                                                 meta_data={})
+
+                        # if parent is not None, update parent value with SustainabilityItem
+                        # Update parent children
+                        if item['parent'] is not None:
+                            parent = items[int(item['parent'])]
+
+                            sustainability_item.parent = parent
+                            if not isinstance(parent.children, list):
+                                # convert string list to a list
+                                parent.children = ast.literal_eval(
+                                    parent.children)
+                            for i in range(len(parent.children)):
+
+                                if sustainability_item.id == parent.children[i]:
+                                    child_idx = i
+
+                            parent.children[child_idx] = sustainability_item
+
+                        else:
+                            if items[0].children is None:
+                                items[0].children = []
+                            items[0].children.append(sustainability_item)
+                            sustainability_item.parent = items[0]
+
+                        items.append(sustainability_item)
+                    self.root = items[0]
+                    self.version_name = TAXONOMIES_DESC[self._taxonomy_name]
+                    self.version_num = version_num
+                    logging.info("Taxonomy parsed successfully.")
+                    # return SustainabilityTaxonomy(items[0], version_name, version_num)
+                    # return items[0]
+                if response.status_code == 403:
+                    raise AuthorizationException("Unauthorized: please check if you have a valid API key. If you think it's a bug please raise an issue here: https://github.com/Good-Data-Hub/taxonomy4good/issues or contact api.support@gooddatahub.co")
+            else:
+                raise ValueError(
+                    "Taxonomy name provided does not exist. Please verify the value provided. If you think it's a bug please raise an issue here: https://github.com/Good-Data-Hub/taxonomy4good/issues or contact api.support@gooddatahub.co for suggestions")
         else:
-            self.root = root
-            self.version_name = version_name
-            self.version_num = version_num
+            logging.warning("API version is available in preview. Contact api.support@gooddatahub.co to request access!")
+            if root is None:
+                
+                # default: ESG Taxonomy
+                full_lexicon = from_file(filepath=taxonomy_name,
+                                         version_name=TAXONOMIES_DESC[taxonomy_name],
+                                         version_num=version_num,
+                                         filetype='excel',
+                                         meta=True)
+                self.root = full_lexicon.root
+                self.version_name = full_lexicon.version_name
+                self.version_num = full_lexicon.version_num
+            else:
+                self.root = root
+                self.version_name = version_name
+                self.version_num = version_num
 
     def insert_items(self, items):
         """ Insert additional items (terms/lexicons) to this existing taxonomy4good
@@ -139,7 +231,8 @@ class SustainabilityTaxonomy:
             for ci in current_items:
                 # specify next level items if current item is not leaf item
                 if ci.children is not None:
-                    next_level_items = np.concatenate([next_level_items, ci.children])
+                    next_level_items = np.concatenate(
+                        [next_level_items, ci.children])
 
             # update the state of the iteration step and update the current items to list
             items.append(np.array([ci for ci in current_items]))
@@ -365,7 +458,8 @@ class SustainabilityTaxonomy:
                         sep = "└"
                     else:
                         sep = "├"
-                    print(sep + "─────" + str(start_item.name) + " : " + str(start_item.score))
+                    print(sep + "─────" + str(start_item.name) +
+                          " : " + str(start_item.score))
                 else:
                     if islast:
                         s = " "
@@ -382,7 +476,8 @@ class SustainabilityTaxonomy:
                         islast = True
 
                     # run function again on children by passing level status
-                    self.print_hierarchy(start_item.children[idx], current_level, islast)
+                    self.print_hierarchy(
+                        start_item.children[idx], current_level, islast)
 
     def get_level_scores(self, level):
         """Compute the weighted values/scores for the specified level
@@ -451,7 +546,8 @@ class SustainabilityTaxonomy:
             if self.root.children is not None:
                 top_level_name = [child.name for child in self.root.children]
                 print(f"Top level items are {top_level_name}")
-                print(f"Top level items scores: {[item.score for item in self.root.children]}")
+                print(
+                    f"Top level items scores: {[item.score for item in self.root.children]}")
 
     def to_dataframe(self, start_root=None):
         """Convert the entire taxonomy4good to a DataFrame
@@ -610,10 +706,12 @@ class SustainabilityTaxonomy:
         if len(start_root.children) == 1:
             dict_builder = self.taxonomy_to_dict(start_root.children[0])
         else:
-            dict_builder = [self.taxonomy_to_dict(child) for child in start_root.children]
+            dict_builder = [self.taxonomy_to_dict(
+                child) for child in start_root.children]
 
         root_dict = start_root.to_dict()
-        root_dict['children'] = [dict_builder] if isinstance(dict_builder, dict) else dict_builder
+        root_dict['children'] = [dict_builder] if isinstance(
+            dict_builder, dict) else dict_builder
 
         return root_dict
 
@@ -641,25 +739,28 @@ def from_file(filepath, version_name="Standard Taxonomy", version_num="0.1.0", f
         # if the name corresponds to one of the existing taxonomies, get file from taxonomies directory
         if filepath in BUILTIN_TAXONOMIES:
             root.name = TAXONOMIES_DESC[filepath]
-            items_df = pd.read_excel(os.path.dirname(os.path.abspath(__file__)) + "/taxonomies/" + filepath + ".xlsx")
+            items_df = pd.read_excel(os.path.dirname(os.path.abspath(
+                __file__)) + "/taxonomies/" + filepath + ".xlsx")
             version_name = TAXONOMIES_DESC[filepath]
         else:
             items_df = pd.read_excel(filepath)
     elif filetype == 'json':
         items_df = pd.read_json(filepath)
     else:
-        raise FileTypeNotSupportedError(f"{filetype} is currently not supported")
+        raise FileTypeNotSupportedError(
+            f"{filetype} is currently not supported")
 
     items_df.replace({np.nan: None}, inplace=True)
 
     items = [root]
 
     # Consider any additional columns as meta-data
-    all_columns = items_df.columns
+    all_columns = [c.lower() for c in items_df.columns]
+
     meta_data_col = [col for col in all_columns
                      if col not in ["id", "name", "level", "grouping",
                                     "parent", "score", "weight", "children"]]
-
+    items_df.columns = all_columns
     # create sustainability items
     for item in items_df.to_dict('records'):
         # create item with respective attributes
@@ -667,7 +768,6 @@ def from_file(filepath, version_name="Standard Taxonomy", version_num="0.1.0", f
             meta_dict = {key: item[key] for key in meta_data_col}
         else:
             meta_dict = {}
-
         sustainability_item = SustainabilityItem(id=item['id'],
                                                  name=item['name'],
                                                  level=item['level'],
